@@ -16,6 +16,7 @@ Autores:
 2. [Instalação com Docker](#instalação-do-mongo-para-usardocker)
 3. [Uso do Shell e Comandos Úteis](#uso-do-shell)
 4. [Fazendo Backup e Restore do Mongo](#backup-e-restore)
+5. [Como consumir as rotas do projeto](#chamadas-via-insomniapostman)
 
 ## Sobre o projeto
 https://www.figma.com/board/eFixy0yt61WAYY21CPrwiq/Untitled?node-id=0-1&t=hrcMU3oJyB3mzfLF-1
@@ -60,3 +61,12 @@ Roda comando criando conexão entre pasta local e container
 -- docker exec -it peter-parking mongosh
 
 ##TO BE CONTINUED
+
+
+### Chamadas via Insomnia/Postman
+```json
+//Trazer todos os carros cadastrados
+curl --request GET \
+--url http://localhost:8080/carros \
+--header 'User-Agent: insomnia/10.3.0'
+```

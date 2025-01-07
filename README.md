@@ -35,10 +35,13 @@ Caso esteja utilizando com docker, ele já vem com o shell na imagem.
 Utilizar o shell: docker exec -it peter-parking mongosh  
 Acessar console do container: docker exec -it peter-parking bash  
 Listar DBs: show dbs  
-Trocar para Parquimetro: use parquimetro
+Trocar para Parquimetro: use parquimetro  
 Listar carros estacionados: db.parquimetro.find()  
 Listar carros cadastrados: db.carros.find()  
-Inserir um carro: db.carro.insertOne({placaDoCarro:"EXW6772", modelo:"Celta"})  
+Inserir um carro: 
+```json
+db.carro.insertOne({placaDoCarro:"EXW6772", modelo:"Celta"})
+```
 Estacionando um carro:   
 ```json
 db.parquimetro.insertOne({  

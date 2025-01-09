@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "c863054b-585d-49ff-a8a6-66d36a5cfe6a",
+		"name": "PeterParking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24107059"
+	},
+	"item": [
+		{
+			"name": "Carro",
+			"item": [
+				{
+					"name": "Carro - Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/carros",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Carro - Buscar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/carros/6780059d5d9c246e51a30ce0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carros",
+								"6780059d5d9c246e51a30ce0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Carro - Buscar Por Placa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/carros/placa/FGH4567",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carros",
+								"placa",
+								"FGH4567"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Carro - Salvar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"placaDoCarro\":\"FGH4567\",\r\n    \"modelo\":\"Polo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/carros",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Carro - Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/carros/ABC1234",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carros",
+								"ABC1234"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Carro - Atualizar",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

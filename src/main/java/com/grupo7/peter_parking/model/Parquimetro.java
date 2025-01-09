@@ -1,11 +1,13 @@
 package com.grupo7.peter_parking.model;
 
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+@Data
 @Document
 public class Parquimetro {
     @Id
@@ -19,5 +21,6 @@ public class Parquimetro {
 
     @DBRef
     private Carro carro;
+
 
 }

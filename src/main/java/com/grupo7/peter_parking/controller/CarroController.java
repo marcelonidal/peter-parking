@@ -20,13 +20,13 @@ public class CarroController {
 
     @GetMapping
     public ResponseEntity<List<CarroDto>> getAll() {
-        return ResponseEntity.ok(this.carroService.getAll());
+        return ResponseEntity.ok(this.carroService.getAllCarros());
     }
 
     @GetMapping("/placa/{placaDoCarro}")
     public ResponseEntity<CarroDto> getByPlacaDoCarro(@PathVariable String placaDoCarro){
         try {
-            CarroDto carroDto = carroService.findByPlacaDoCarro(placaDoCarro);
+            CarroDto carroDto = carroService.findCarroByPlacaDoCarro(placaDoCarro);
             return ResponseEntity.ok(carroDto);
         } catch (RuntimeException e){
             return ResponseEntity.notFound().build();
@@ -36,7 +36,7 @@ public class CarroController {
     @GetMapping("/{id}")
     public ResponseEntity<CarroDto> getById(@PathVariable String id){
         try {
-            CarroDto carroDto = carroService.findById(id);
+            CarroDto carroDto = carroService.findCarroById(id);
             return ResponseEntity.ok(carroDto);
         } catch (RuntimeException e){
             return ResponseEntity.notFound().build();
@@ -46,13 +46,13 @@ public class CarroController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody CarroDto carroDto){
-        carroService.save(carroDto);
+        carroService.saveCarro(carroDto);
     }
 
     @PutMapping("/{placaDoCarro}")
     public ResponseEntity<String> update(@PathVariable String placaDoCarro, @RequestBody CarroDto carroDto){
         try {
-            carroService.update(placaDoCarro, carroDto);
+            carroService.updateCarroByPlacaDoCarro(placaDoCarro, carroDto);
             return ResponseEntity.ok().build();
         } catch (RuntimeException e){
             return ResponseEntity.notFound().build();
@@ -62,6 +62,6 @@ public class CarroController {
     @DeleteMapping("/{placaDoCarro}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable String placaDoCarro){
-        carroService.delete(placaDoCarro);
+        carroService.deleteCarroByPlacaDoCarro(placaDoCarro);
     }
 }

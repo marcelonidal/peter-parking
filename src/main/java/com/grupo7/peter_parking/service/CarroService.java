@@ -1,19 +1,25 @@
 package com.grupo7.peter_parking.service;
 
 import com.grupo7.peter_parking.dto.CarroDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
-public interface CarroService {    
+public interface CarroService {
 
-    List<CarroDto> getAllCarros();
+    List<CarroDto> listarTodos();
 
-    CarroDto findCarroByPlacaDoCarro(String placaDoCarro);
+    Page<CarroDto> listarPaginado(Pageable pageable);
 
-    CarroDto findCarroById(String id);
+    CarroDto buscarPorId(String idCarro);
 
-    void saveCarro(CarroDto carroDto);
+    CarroDto buscarPorPlaca(String placa);
 
-    void deleteCarroByPlacaDoCarro(String placaDoCarro);
+    CarroDto salvar(CarroDto carroDto);
 
-    void updateCarroByPlacaDoCarro(String placaDoCarro, CarroDto carroDto);
+    CarroDto atualizar(String idCarro, CarroDto carroDto);
+
+    void deletarPorId(String idCarro);
+
 }

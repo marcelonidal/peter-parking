@@ -1,14 +1,19 @@
 package com.grupo7.peter_parking.dto;
 
-import com.grupo7.peter_parking.model.Parquimetro;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-public record ParquimetroDto(String codigo, LocalDateTime estacionamentoEntrada,
-                             LocalDateTime estacionamentoSaida, LocalDateTime permanencia) {
+public record ParquimetroDto(
+        String idParquimetro,
 
-    public ParquimetroDto (Parquimetro parquimetro){
-        this(parquimetro.getCodigo(), parquimetro.getEstacionamentoEntrada(),
-                parquimetro.getEstacionamentoSaida(), parquimetro.getPermanencia());
-    }
-}
+        @NotNull(message = "A data de entrada e obrigatoria.")
+        LocalDateTime entrada,
+
+        @NotNull(message = "A data de saida e obrigatoria.")
+        LocalDateTime saida,
+
+        @NotBlank(message = "O ID do carro e obrigatorio.")
+        String idCarro
+) {}

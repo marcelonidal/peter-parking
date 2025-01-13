@@ -6,22 +6,20 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
-@Document(collection = "parquimetros")
-public class Parquimetro {
+@Document(collection = "pessoas")
+public class Pessoa {
 
     @Id
-    private String idParquimetro;
+    private String idPessoa;
 
-    private LocalDateTime entrada;
+    private String nome;
 
-    private LocalDateTime saida;
-
-    private Long duracao;
+    private String cpf;
 
     @DBRef
-    private Carro carro;
+    private List<Carro> carros;
 }

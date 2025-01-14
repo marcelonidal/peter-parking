@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-01-13T01:59:21-0300",
-    comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.4 (Red Hat, Inc.)"
+    date = "2025-01-14T09:21:41-0300",
+    comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.5 (Amazon.com Inc.)"
 )
 @Component
 public class CarroMapperImpl implements CarroMapper {

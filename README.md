@@ -20,6 +20,8 @@ Autores:
 
 ## Sobre o projeto
 https://www.figma.com/board/eFixy0yt61WAYY21CPrwiq/Untitled?node-id=0-1&t=hrcMU3oJyB3mzfLF-1
+#### Doc Técnica
+http://localhost:8080/parquimetro-api/swagger-ui/index.html#/
 
 ## Instalação do mongo para usar(docker)
 ### Baixar e rodar ou apenas rodar

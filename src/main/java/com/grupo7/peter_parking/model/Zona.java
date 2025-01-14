@@ -9,13 +9,13 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
-@Document(collection = "estacionamentos")
-public class Estacionamento {
+@Document(collection = "zonas")
+public class Zona {
 
     @Id
-    private String idEstacionamento;
+    private String idZona;
 
     private String nome;
 
-    private BigDecimal precoPorHora;
+    private BigDecimal valorPorHora;
 }

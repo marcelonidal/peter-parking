@@ -1,17 +1,23 @@
 package com.grupo7.peter_parking.service.impl;
 
+import com.grupo7.peter_parking.dto.CarroDto;
 import com.grupo7.peter_parking.dto.ParquimetroDto;
+import com.grupo7.peter_parking.dto.ZonaDto;
 import com.grupo7.peter_parking.exception.ResourceNotFoundException;
 import com.grupo7.peter_parking.mapper.ParquimetroMapper;
 import com.grupo7.peter_parking.model.Carro;
+import com.grupo7.peter_parking.model.Zona;
 import com.grupo7.peter_parking.model.Parquimetro;
 import com.grupo7.peter_parking.repository.ParquimetroRepository;
 import com.grupo7.peter_parking.service.CarroService;
+import com.grupo7.peter_parking.service.ZonaService;
 import com.grupo7.peter_parking.service.ParquimetroService;
+import com.grupo7.peter_parking.utils.CalculadoraValorTotal;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,13 +27,18 @@ public class ParquimetroServiceImpl implements ParquimetroService {
     private final ParquimetroRepository parquimetroRepository;
     private final ParquimetroMapper parquimetroMapper;
     private final CarroService carroService;
+    private final ZonaService zonaService;
+    private final CalculadoraValorTotal calculadoraValorTotal;
 
     public ParquimetroServiceImpl(ParquimetroRepository parquimetroRepository,
                                   ParquimetroMapper parquimetroMapper,
-                                  CarroService carroService) {
+                                  CarroService carroService, ZonaService zonaService,
+                                  CalculadoraValorTotal calculadoraValorTotal) {
         this.parquimetroRepository = parquimetroRepository;
         this.parquimetroMapper = parquimetroMapper;
         this.carroService = carroService;
+        this.zonaService = zonaService;
+        this.calculadoraValorTotal = calculadoraValorTotal;
     }
 
     @Override
@@ -54,10 +65,35 @@ public class ParquimetroServiceImpl implements ParquimetroService {
     @Override
     public ParquimetroDto salvar(ParquimetroDto parquimetroDto) {
         carroService.buscarPorId(parquimetroDto.idCarro());
+        ZonaDto zonaDto = zonaService.buscarPorId(parquimetroDto.idZona());
+
         Parquimetro parquimetro = parquimetroMapper.toEntity(parquimetroDto);
+
+        parquimetro.setEntrada(LocalDateTime.now());
+        parquimetro.setSaida(parquimetro.getEntrada().plusHours(parquimetro.getDuracaoEmHoras()));
+
+        parquimetro.setValorTotal(calculadoraValorTotal.calcularValorTotal(parquimetro, zonaDto.valorPorHora()));
+
         parquimetro = parquimetroRepository.save(parquimetro);
         return parquimetroMapper.toDto(parquimetro);
     }
+
+//    @Override
+//    public ParquimetroDto saida(String idParquimetro) {
+//        Parquimetro parquimetro = parquimetroRepository.findById(idParquimetro)
+//                .orElseThrow(() -> new ResourceNotFoundException("Parquimetro nao encontrado com o ID: " + idParquimetro));
+//
+//        parquimetro.setSaida(LocalDateTime.now().plusHours(1));
+//
+//        long duracaoEmHoras = Duration.between(parquimetro.getEntrada(), parquimetro.getSaida())
+//                .toHours();
+//        BigDecimal valorPorHora = parquimetro.getEstacionamento().getPrecoPorHora();
+//        BigDecimal valorTotal = calculadoraEstacionamento.calcularValorTotal(valorPorHora, duracaoEmHoras);
+//        parquimetro.setValorTotal(valorTotal);
+//
+//        parquimetro = parquimetroRepository.save(parquimetro);
+//        return parquimetroMapper.toDto(parquimetro);
+//    }
 
     @Override
     public ParquimetroDto atualizar(String idParquimetro, ParquimetroDto parquimetroDto) {
@@ -65,11 +101,19 @@ public class ParquimetroServiceImpl implements ParquimetroService {
                 .orElseThrow(() -> new ResourceNotFoundException("Parquimetro nao encontrado com o ID: " + idParquimetro));
 
         carroService.buscarPorId(parquimetroDto.idCarro());
+        ZonaDto zonaDto = zonaService.buscarPorId(parquimetroDto.idZona());
 
-        parquimetroExistente.setEntrada(parquimetroDto.entrada());
-        parquimetroExistente.setSaida(parquimetroDto.saida());
+        parquimetroExistente.setSaida(parquimetroExistente.getEntrada()
+                .plusHours(parquimetroDto.duracaoEmHoras()));
+
+        parquimetroExistente.setDuracaoEmHoras(parquimetroDto.duracaoEmHoras());
         parquimetroExistente.setCarro(new Carro());
+        parquimetroExistente.setZona(new Zona());
         parquimetroExistente.getCarro().setIdCarro(parquimetroDto.idCarro());
+        parquimetroExistente.getZona().setIdZona(parquimetroDto.idZona());
+
+        parquimetroExistente.setValorTotal(calculadoraValorTotal.calcularValorTotal(parquimetroExistente,
+                zonaDto.valorPorHora()));
 
         Parquimetro parquimetroAtualizado = parquimetroRepository.save(parquimetroExistente);
         return parquimetroMapper.toDto(parquimetroAtualizado);

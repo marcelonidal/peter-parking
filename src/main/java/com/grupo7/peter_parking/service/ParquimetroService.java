@@ -16,6 +16,8 @@ public interface ParquimetroService {
 
     ParquimetroDto salvar(ParquimetroDto parquimetroDto);
 
+//    ParquimetroDto saida(String idParquimetro);
+
     ParquimetroDto atualizar(String idParquimetro, ParquimetroDto parquimetroDto);
 
     void deletarPorId(String idParquimetro);

@@ -11,4 +11,6 @@ public interface ParquimetroRepository extends MongoRepository<Parquimetro, Stri
 
     List<Parquimetro> findByCarro_IdCarro(String idCarro);
 
+    List<Parquimetro> findByZona(String idZona);
+
 }

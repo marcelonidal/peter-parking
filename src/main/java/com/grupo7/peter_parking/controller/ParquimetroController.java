@@ -100,6 +100,21 @@ public class ParquimetroController {
         return ResponseEntity.ok(parquimetroService.atualizar(idParquimetro, parquimetroDto));
     }
 
+//    @PutMapping("/{idParquimetro}/saida")
+//    @Operation(summary = "Dar saida no parquimetro", description = "Faz o checkout em um parquimetro existente")
+//    @ApiResponses({
+//            @ApiResponse(responseCode = "200", description = "Sáida do parquimetro executado com sucesso",
+//                    content = @Content(mediaType = "application/json",
+//                            schema = @Schema(implementation = ParquimetroDto.class))),
+//            @ApiResponse(responseCode = "404", description = "Parquimetro nao encontrado"),
+//            @ApiResponse(responseCode = "400", description = "Requisicao invalida"),
+//            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+//    })
+//    public ResponseEntity<ParquimetroDto> saida(
+//            @PathVariable String idParquimetro) {
+//        return ResponseEntity.ok(parquimetroService.saida(idParquimetro));
+//    }
+
     @DeleteMapping("/{idParquimetro}")
     @Operation(summary = "Deletar parquimetro por ID", description = "Exclui um parquimetro pelo seu ID")
     @ApiResponses({

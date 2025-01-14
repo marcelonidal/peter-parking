@@ -7,17 +7,17 @@ import jakarta.validation.constraints.PositiveOrZero;
 
 import java.math.BigDecimal;
 
-public record EstacionamentoDto(
+public record ZonaDto(
 
     @Schema(hidden = true)
-    String idEstacionamento,
+    String idZona,
 
-    @NotBlank(message = "O nome do estacionamento e obrigatoria.")
+    @NotBlank(message = "O nome do zona e obrigatoria.")
     String nome,
 
-    @NotNull(message = "O preco por hora e obrigatorio.")
-    @PositiveOrZero(message = "O preco deve ser maior ou igual a zero")
+    @NotNull(message = "O valor por hora e obrigatorio.")
+    @PositiveOrZero(message = "O valor deve ser maior ou igual a zero")
     @Schema(type = "number", format = "double", example = "10.50")
-    BigDecimal precoPorHora
+    BigDecimal valorPorHora
 ) {
 }

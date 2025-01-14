@@ -9,8 +9,10 @@ import org.mapstruct.Mapping;
 public interface ParquimetroMapper {
 
     @Mapping(target = "carro.idCarro", source = "idCarro")
+    @Mapping(target = "zona.idZona", source = "idZona")
     Parquimetro toEntity(ParquimetroDto dto);
 
     @Mapping(target = "idCarro", source = "carro.idCarro")
+    @Mapping(target = "idZona", source = "zona.idZona")
     ParquimetroDto toDto(Parquimetro entity);
 }

@@ -1,9 +1,9 @@
 package com.grupo7.peter_parking.repository;
 
-import com.grupo7.peter_parking.model.Estacionamento;
+import com.grupo7.peter_parking.model.Zona;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EstacionamentoRepository extends MongoRepository<Estacionamento, String> {
+public interface ZonaRepository extends MongoRepository<Zona, String> {
 }

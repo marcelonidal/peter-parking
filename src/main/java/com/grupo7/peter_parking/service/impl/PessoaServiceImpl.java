@@ -5,7 +5,9 @@ import com.grupo7.peter_parking.exception.ResourceNotFoundException;
 import com.grupo7.peter_parking.mapper.PessoaMapper;
 import com.grupo7.peter_parking.model.Pessoa;
 import com.grupo7.peter_parking.repository.PessoaRepository;
+import com.grupo7.peter_parking.service.CarroService;
 import com.grupo7.peter_parking.service.PessoaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -45,12 +47,14 @@ public class PessoaServiceImpl implements PessoaService {
         return pessoaMapper.toDto(pessoa);
     }
 
+    @Autowired
+    private CarroService carroService;
     @Override
     public PessoaDto salvar(PessoaDto pessoaDto) {
         pessoaRepository.findByCpf(pessoaDto.cpf()).ifPresent(existing -> {
             throw new RuntimeException("CPF ja cadastrado: " + pessoaDto.cpf());
         });
-        Pessoa pessoa = pessoaMapper.toEntity(pessoaDto);
+        Pessoa pessoa = pessoaMapper.toEntity(pessoaDto, carroService);
         pessoa = pessoaRepository.save(pessoa);
         return pessoaMapper.toDto(pessoa);
     }

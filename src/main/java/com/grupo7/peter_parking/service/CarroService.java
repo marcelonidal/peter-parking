@@ -1,6 +1,7 @@
 package com.grupo7.peter_parking.service;
 
 import com.grupo7.peter_parking.dto.CarroDto;
+import com.grupo7.peter_parking.model.Carro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -22,4 +23,5 @@ public interface CarroService {
 
     void deletarPorId(String idCarro);
 
+    List<Carro> findAllByIds(List<String> ids);
 }

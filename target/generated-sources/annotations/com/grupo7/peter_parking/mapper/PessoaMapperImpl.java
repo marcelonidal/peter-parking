@@ -1,20 +1,23 @@
 package com.grupo7.peter_parking.mapper;
 
+import com.grupo7.peter_parking.dto.CarroDto;
 import com.grupo7.peter_parking.dto.PessoaDto;
 import com.grupo7.peter_parking.model.Pessoa;
+import com.grupo7.peter_parking.service.CarroService;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-01-14T19:36:01-0300",
+    date = "2025-01-15T13:02:41-0300",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.5 (Amazon.com Inc.)"
 )
 @Component
 public class PessoaMapperImpl implements PessoaMapper {
 
     @Override
-    public Pessoa toEntity(PessoaDto dto) {
+    public Pessoa toEntity(PessoaDto dto, CarroService carroService) {
         if ( dto == null ) {
             return null;
         }
@@ -24,6 +27,8 @@ public class PessoaMapperImpl implements PessoaMapper {
         pessoa.setIdPessoa( dto.idPessoa() );
         pessoa.setNome( dto.nome() );
         pessoa.setCpf( dto.cpf() );
+
+        pessoa.setCarros( dto.carrosIds() != null ? carroService.findAllByIds(dto.carrosIds()) : new java.util.ArrayList<com.grupo7.peter_parking.model.Carro>() );
 
         return pessoa;
     }
@@ -42,7 +47,10 @@ public class PessoaMapperImpl implements PessoaMapper {
         nome = entity.getNome();
         cpf = entity.getCpf();
 
-        PessoaDto pessoaDto = new PessoaDto( idPessoa, nome, cpf );
+        List<String> carrosIds = entity.getCarros().stream().map(com.grupo7.peter_parking.model.Carro::getIdCarro).toList();
+        List<CarroDto> carros = entity.getCarros().stream().map(carro -> new CarroDto(carro.getIdCarro(), carro.getPlaca(), carro.getModelo())).toList();
+
+        PessoaDto pessoaDto = new PessoaDto( idPessoa, nome, cpf, carrosIds, carros );
 
         return pessoaDto;
     }

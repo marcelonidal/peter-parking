@@ -81,4 +81,9 @@ public class CarroServiceImpl implements CarroService {
         carroRepository.deleteById(idCarro);
     }
 
+    @Override
+    public List<Carro> findAllByIds(List<String> ids) {
+        return carroRepository.findAllById(ids);
+    }
+
 }

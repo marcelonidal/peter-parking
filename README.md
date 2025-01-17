@@ -62,6 +62,7 @@ http://localhost:8080/parquimetro-api/swagger-ui/index.html#/
 
 ### Subindo a aplicação e o mongo com docker
 ```textmate
+---------CRIANDO A IMAGEM--------------
 1 - Gerar o .jar
 mvn clean package
 
@@ -77,4 +78,9 @@ docker run --name mongo-peter-parking --network parkingrede -d -p 27017:27017 mo
 
 5 - Executar container com imagem da aplicação
 docker run --name app-peter-parking --network parkingrede -e MONGO_NAME=mongo-peter-parking -d -p 8080:8080 peter-parking
+
+------------REUTILIZANDO IMGEM-----------------------
+Após subir a imagem no dockerhub de maneira pública, basta utilizar a imagem pública para subir a aplicação
+docker run --name app-peter-parking --network parkingrede -e MONGO_NAME=mongo-peter-parking -d -p 8080:8080 majorv22/peter-parking:1.0
+
 ```

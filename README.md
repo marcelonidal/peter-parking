@@ -15,8 +15,8 @@ Autores:
 1. [Sobre o Projeto](#sobre-o-projeto)
 2. [Instalação com Docker](#instalação-do-mongo-para-usardocker)
 3. [Uso do Shell e Comandos Úteis](#uso-do-shell)
-4. [Fazendo Backup e Restore do Mongo](#backup-e-restore)
-5. [Como consumir as rotas do projeto](#chamadas-via-insomniapostman)
+4. [Como consumir as rotas do projeto](#chamadas-via-insomniapostman)
+5. [Como consumir as rotas do projeto](#subindo-a-aplicação-e-o-mongo-com-docker)
 
 ## Sobre o projeto
 https://www.figma.com/board/eFixy0yt61WAYY21CPrwiq/Untitled?node-id=0-1&t=hrcMU3oJyB3mzfLF-1
@@ -25,9 +25,9 @@ http://localhost:8080/parquimetro-api/swagger-ui/index.html#/
 
 ## Instalação do mongo para usar(docker)
 ### Baixar e rodar ou apenas rodar
-Instalar: docker run --name peter-parking -d -p 27017:27017 mongo  
-Iniciar: docker start peter_parking  
-Stopar: docker stop peter_parking  
+Instalar: docker run --name mongo-peter-parking -d -p 27017:27017 mongo  
+Iniciar: docker start mongo-peter-parking  
+Stopar: docker stop mongo-peter-parking  
 Validar: docker ps
 
 OBS: Pode-se utilizar o MongoCompass para melhor visualização dos dados  
@@ -35,8 +35,8 @@ https://www.mongodb.com/products/tools/compass
 
 ### Uso do shell
 Caso esteja utilizando com docker, ele já vem com o shell na imagem.       
-Utilizar o shell: docker exec -it peter-parking mongosh  
-Acessar console do container: docker exec -it peter-parking bash  
+Utilizar o shell: docker exec -it mongo-peter-parking mongosh  
+Acessar console do container: docker exec -it mongo-peter-parking bash  
 Listar DBs: show dbs  
 Trocar para Parquimetro: use parquimetro  
 Listar carros estacionados: db.parquimetro.find()  
@@ -54,21 +54,27 @@ permanencia: ISODate('2025-01-07T04:37:40.490Z')
 });
 ```
 
-### Backup e Restore
-#### Criando backup
-Roda comando criando conexão entre pasta local e container  
--- docker run -d --name peter-parking -v C:\Users\{SEU_USER}\mongodb\backup:/parquimetro -p 27017:27017 mongo  
-
-#### Entrar no mongo shell para executar comandos
--- docker exec -it peter-parking mongosh
-
-##TO BE CONTINUED
-
-
 ### Chamadas via Insomnia/Postman
-```json
-//Trazer todos os carros cadastrados
-curl --request GET \
---url http://localhost:8080/carros \
---header 'User-Agent: insomnia/10.3.0'
+```textmate
+//Utilizar a doc técnica
+http://localhost:8080/parquimetro-api/swagger-ui/index.html#/
+```
+
+### Subindo a aplicação e o mongo com docker
+```textmate
+1 - Gerar o .jar
+mvn clean package
+
+2 - Constrói Imagem da aplicação
+cd {Path_Projeto}/peter-parking
+docker build -t peter-parking:latest .
+
+3 - Criar uma rede para comunicação entre a aplicação e o mongo
+docker network create parkingrede
+
+4 - Subir container do mongo com a rede criada
+docker run --name mongo-peter-parking --network parkingrede -d -p 27017:27017 mongo
+
+5 - Executar container com imagem da aplicação
+docker run --name app-peter-parking --network parkingrede -e MONGO_NAME=mongo-peter-parking -d -p 8080:8080 peter-parking
 ```

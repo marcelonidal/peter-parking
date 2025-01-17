@@ -49,6 +49,10 @@ public class ZonaServiceImpl implements ZonaService {
 
     @Override
     public ZonaDto salvar(ZonaDto zonaDto) {
+        zonaRepository.findByNome(zonaDto.nome()).ifPresent(existing -> {
+            throw new RuntimeException("Zona ja cadastrada: " + zonaDto.nome());
+        });
+
         Zona zona = zonaMapper.toEntity(zonaDto);
         zona = zonaRepository.save(zona);
         return zonaMapper.toDto(zona);

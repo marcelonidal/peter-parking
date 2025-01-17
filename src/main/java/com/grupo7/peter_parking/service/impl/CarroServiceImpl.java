@@ -54,6 +54,9 @@ public class CarroServiceImpl implements CarroService {
 
     @Override
     public CarroDto salvar(CarroDto carroDto) {
+        carroRepository.findByPlaca(carroDto.placa()).ifPresent(existing -> {
+            throw new RuntimeException("Placa ja cadastrada: " + carroDto.placa());
+        });
         Carro carro = carroMapper.toEntity(carroDto);
         carro = carroRepository.save(carro);
         return carroMapper.toDto(carro);

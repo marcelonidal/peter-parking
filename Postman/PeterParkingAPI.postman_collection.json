@@ -1,0 +1,842 @@
+{
+	"info": {
+		"_postman_id": "03ee7036-44c5-49b3-b00d-97258c25f4c5",
+		"name": "Peter Parking API",
+		"description": "API para Gestao de Parquimetros, Carros e Pessoas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "695230"
+	},
+	"item": [
+		{
+			"name": "carro",
+			"item": [
+				{
+					"name": "Listar todos os carros",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/carro",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carro"
+							]
+						},
+						"description": "Retorna uma lista de todos os carros cadastrados"
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar novo carro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"modelo\": \"Corsa\",\n  \"placa\": \"GRP7F14\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/carro",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carro"
+							]
+						},
+						"description": "Cadastra um novo carro"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar carros paginados",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/carro/paginado?page=1&size=100&sort=\"ASC\"",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carro",
+								"paginado"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "(Required) Informacoes de paginacao"
+								},
+								{
+									"key": "size",
+									"value": "100",
+									"description": "(Required) Informacoes de paginacao"
+								},
+								{
+									"key": "sort",
+									"value": "\"ASC\"",
+									"description": "(Required) Informacoes de paginacao"
+								}
+							]
+						},
+						"description": "Retorna uma lista paginada de carros cadastrados"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar carro por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/carro/:idCarro",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carro",
+								":idCarro"
+							],
+							"variable": [
+								{
+									"key": "idCarro",
+									"value": "6789a3c6840a4346ac4b6e47",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Busca um carro pelo seu ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar carro",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"modelo\": \"Sandero\",\n  \"placa\": \"GRP7F14\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/carro/:idCarro",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carro",
+								":idCarro"
+							],
+							"variable": [
+								{
+									"key": "idCarro",
+									"value": "6789a3c6840a4346ac4b6e47",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Atualiza os dados de um carro existente"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar carro por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carro/:idCarro",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carro",
+								":idCarro"
+							],
+							"variable": [
+								{
+									"key": "idCarro",
+									"value": "6789a3c6840a4346ac4b6e47",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Exclui um carro pelo seu ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pessoa",
+			"item": [
+				{
+					"name": "Listar todas as pessoas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pessoa",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoa"
+							]
+						},
+						"description": "Retorna uma lista de todas as pessoas cadastradas"
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar nova pessoa",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": \"92021477010\",\n  \"nome\": \"Joao Silva\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pessoa",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoa"
+							]
+						},
+						"description": "Cadastra uma nova pessoa"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar pessoas paginadas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pessoa/paginado?page=1&size=100&sort=\"ASC\"",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoa",
+								"paginado"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "(Required) Informacoes de paginacao"
+								},
+								{
+									"key": "size",
+									"value": "100",
+									"description": "(Required) Informacoes de paginacao"
+								},
+								{
+									"key": "sort",
+									"value": "\"ASC\"",
+									"description": "(Required) Informacoes de paginacao"
+								}
+							]
+						},
+						"description": "Retorna uma lista paginada de pessoas cadastradas"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar pessoa por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pessoa/:idPessoa",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoa",
+								":idPessoa"
+							],
+							"variable": [
+								{
+									"key": "idPessoa",
+									"value": "6789a3c7840a4346ac4b6e48",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Busca uma pessoa pelo seu ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar pessoa",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": \"92021477010\",\n  \"nome\": \"Joao da Silva\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pessoa/:idPessoa",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoa",
+								":idPessoa"
+							],
+							"variable": [
+								{
+									"key": "idPessoa",
+									"value": "6789a3c7840a4346ac4b6e48",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Atualiza os dados de uma pessoa existente"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar pessoa por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pessoa/:idPessoa",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoa",
+								":idPessoa"
+							],
+							"variable": [
+								{
+									"key": "idPessoa",
+									"value": "6789a3c7840a4346ac4b6e48",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Exclui uma pessoa pelo seu ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "zona",
+			"item": [
+				{
+					"name": "Listar todos as zonas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/zona",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"zona"
+							]
+						},
+						"description": "Retorna uma lista de todos as zonas cadastrados"
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar nova zona",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Ipiranga\",\n  \"valorPorHora\": \"5.00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/zona",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"zona"
+							]
+						},
+						"description": "Cadastra uma nova zona"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar zonas paginadas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/zona/paginado?page=1&size=100&sort=\"ASC\"",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"zona",
+								"paginado"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "(Required) Informacoes de paginacao"
+								},
+								{
+									"key": "size",
+									"value": "100",
+									"description": "(Required) Informacoes de paginacao"
+								},
+								{
+									"key": "sort",
+									"value": "\"ASC\"",
+									"description": "(Required) Informacoes de paginacao"
+								}
+							]
+						},
+						"description": "Retorna uma lista paginada de zonas cadastradas"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar zona por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/zona/:idZona",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"zona",
+								":idZona"
+							],
+							"variable": [
+								{
+									"key": "idZona",
+									"value": "6789a3c7840a4346ac4b6e49",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Busca uma zona pelo seu ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar zona",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Ipiranga\",\n  \"valorPorHora\": \"6.00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/zona/:idZona",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"zona",
+								":idZona"
+							],
+							"variable": [
+								{
+									"key": "idZona",
+									"value": "6789a3c7840a4346ac4b6e49",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Atualiza os dados de uma zona existente"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar zona por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/zona/:idZona",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"zona",
+								":idZona"
+							],
+							"variable": [
+								{
+									"key": "idZona",
+									"value": "6789a3c7840a4346ac4b6e49",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Exclui uma zona pelo seu ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "parquimetro",
+			"item": [
+				{
+					"name": "Listar todos os parquimetros",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/parquimetro",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"parquimetro"
+							]
+						},
+						"description": "Retorna uma lista de todos os parquimetros cadastrados"
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar novo parquimetro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"duracaoEmHoras\": 2,\n  \"idCarro\": \"6789a3c6840a4346ac4b6e47\",\n  \"idZona\": \"6789a3c7840a4346ac4b6e49\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/parquimetro",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"parquimetro"
+							]
+						},
+						"description": "Cadastra um novo parquimetro"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar parquimetros paginados",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/parquimetro/paginado?page=1&size=100&sort=\"ASC\"",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"parquimetro",
+								"paginado"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "(Required) Informacoes de paginacao"
+								},
+								{
+									"key": "size",
+									"value": "100",
+									"description": "(Required) Informacoes de paginacao"
+								},
+								{
+									"key": "sort",
+									"value": "\"ASC\"",
+									"description": "(Required) Informacoes de paginacao"
+								}
+							]
+						},
+						"description": "Retorna uma lista paginada de parquimetros cadastrados"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar parquimetro por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/parquimetro/:idParquimetro",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"parquimetro",
+								":idParquimetro"
+							],
+							"variable": [
+								{
+									"key": "idParquimetro",
+									"value": "6789a3d8840a4346ac4b6e4a",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Busca um parquimetro pelo seu ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar parquimetro",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"duracaoEmHoras\": 1,\n  \"idCarro\": \"<string>\",\n  \"idZona\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/parquimetro/:idParquimetro",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"parquimetro",
+								":idParquimetro"
+							],
+							"variable": [
+								{
+									"key": "idParquimetro",
+									"value": "6789a3d8840a4346ac4b6e4a",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Atualiza os dados de um parquimetro existente"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar parquimetro por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/parquimetro/:idParquimetro",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"parquimetro",
+								":idParquimetro"
+							],
+							"variable": [
+								{
+									"key": "idParquimetro",
+									"value": "6789a3d8840a4346ac4b6e4a",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Exclui um parquimetro pelo seu ID"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080/parquimetro-api",
+			"type": "string"
+		}
+	]
+}

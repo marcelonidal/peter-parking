@@ -6,12 +6,12 @@ import com.grupo7.peter_parking.dto.ZonaDto;
 import com.grupo7.peter_parking.exception.ResourceNotFoundException;
 import com.grupo7.peter_parking.mapper.ParquimetroMapper;
 import com.grupo7.peter_parking.model.Carro;
-import com.grupo7.peter_parking.model.Zona;
 import com.grupo7.peter_parking.model.Parquimetro;
+import com.grupo7.peter_parking.model.Zona;
 import com.grupo7.peter_parking.repository.ParquimetroRepository;
 import com.grupo7.peter_parking.service.CarroService;
-import com.grupo7.peter_parking.service.ZonaService;
 import com.grupo7.peter_parking.service.ParquimetroService;
+import com.grupo7.peter_parking.service.ZonaService;
 import com.grupo7.peter_parking.utils.CalculadoraValorTotal;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -64,8 +64,13 @@ public class ParquimetroServiceImpl implements ParquimetroService {
 
     @Override
     public ParquimetroDto salvar(ParquimetroDto parquimetroDto) {
-        carroService.buscarPorId(parquimetroDto.idCarro());
+
+        CarroDto carroDto = carroService.buscarPorId(parquimetroDto.idCarro());
         ZonaDto zonaDto = zonaService.buscarPorId(parquimetroDto.idZona());
+
+        if(carroDto != null && zonaDto != null) {
+            throw new RuntimeException("Parquimetro ja cadastrado para a zona: " + zonaDto.nome() + " e carro: " + carroDto.placa());
+        }
 
         Parquimetro parquimetro = parquimetroMapper.toEntity(parquimetroDto);
 
@@ -77,23 +82,6 @@ public class ParquimetroServiceImpl implements ParquimetroService {
         parquimetro = parquimetroRepository.save(parquimetro);
         return parquimetroMapper.toDto(parquimetro);
     }
-
-//    @Override
-//    public ParquimetroDto saida(String idParquimetro) {
-//        Parquimetro parquimetro = parquimetroRepository.findById(idParquimetro)
-//                .orElseThrow(() -> new ResourceNotFoundException("Parquimetro nao encontrado com o ID: " + idParquimetro));
-//
-//        parquimetro.setSaida(LocalDateTime.now().plusHours(1));
-//
-//        long duracaoEmHoras = Duration.between(parquimetro.getEntrada(), parquimetro.getSaida())
-//                .toHours();
-//        BigDecimal valorPorHora = parquimetro.getEstacionamento().getPrecoPorHora();
-//        BigDecimal valorTotal = calculadoraEstacionamento.calcularValorTotal(valorPorHora, duracaoEmHoras);
-//        parquimetro.setValorTotal(valorTotal);
-//
-//        parquimetro = parquimetroRepository.save(parquimetro);
-//        return parquimetroMapper.toDto(parquimetro);
-//    }
 
     @Override
     public ParquimetroDto atualizar(String idParquimetro, ParquimetroDto parquimetroDto) {

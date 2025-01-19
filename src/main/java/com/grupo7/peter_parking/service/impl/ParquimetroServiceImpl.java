@@ -68,9 +68,14 @@ public class ParquimetroServiceImpl implements ParquimetroService {
         CarroDto carroDto = carroService.buscarPorId(parquimetroDto.idCarro());
         ZonaDto zonaDto = zonaService.buscarPorId(parquimetroDto.idZona());
 
-        if (parquimetroRepository.findByCarro_IdCarroAndZona_IdZona(parquimetroDto.idCarro(), parquimetroDto.idZona()).isPresent()) {
-            throw new ResourceNotFoundException("Parquimetro ja cadastrado para a zona: " + zonaDto.nome() + " e carro: " + carroDto.placa());
-        }
+        parquimetroRepository.findByCarro_IdCarroAndZona_IdZona(parquimetroDto.idCarro(), parquimetroDto.idZona())
+                .ifPresent(parquimetroExistente -> {
+                    // Validar se o horario de saída ja expirou
+                    if (parquimetroExistente.getSaida().isAfter(LocalDateTime.now())) {
+                        throw new ResourceNotFoundException("Parquimetro ja cadastrado para a zona: " + zonaDto.nome()
+                                + " e carro: " + carroDto.placa() + " com validade ativa ate: " + parquimetroExistente.getSaida());
+                    }
+                });
 
         Parquimetro parquimetro = parquimetroMapper.toEntity(parquimetroDto);
 

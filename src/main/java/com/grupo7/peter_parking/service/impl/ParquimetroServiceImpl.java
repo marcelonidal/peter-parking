@@ -68,8 +68,8 @@ public class ParquimetroServiceImpl implements ParquimetroService {
         CarroDto carroDto = carroService.buscarPorId(parquimetroDto.idCarro());
         ZonaDto zonaDto = zonaService.buscarPorId(parquimetroDto.idZona());
 
-        if(carroDto != null && zonaDto != null) {
-            throw new RuntimeException("Parquimetro ja cadastrado para a zona: " + zonaDto.nome() + " e carro: " + carroDto.placa());
+        if (parquimetroRepository.findByCarro_IdCarroAndZona_IdZona(parquimetroDto.idCarro(), parquimetroDto.idZona()).isPresent()) {
+            throw new ResourceNotFoundException("Parquimetro ja cadastrado para a zona: " + zonaDto.nome() + " e carro: " + carroDto.placa());
         }
 
         Parquimetro parquimetro = parquimetroMapper.toEntity(parquimetroDto);

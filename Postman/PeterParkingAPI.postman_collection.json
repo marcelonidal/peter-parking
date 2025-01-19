@@ -255,7 +255,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"cpf\": \"92021477010\",\n  \"nome\": \"Joao Silva\"\n}",
+							"raw": "{\n  \"cpf\": \"92021477010\",\n  \"nome\": \"Joao Silva\",\n  \"carrosIds\" : [\"678c3f18da6b0053e9ab5138\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -667,7 +667,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"duracaoEmHoras\": 2,\n  \"idCarro\": \"6789a3c6840a4346ac4b6e47\",\n  \"idZona\": \"6789a3c7840a4346ac4b6e49\"\n}",
+							"raw": "{\n  \"duracaoEmHoras\": 2,\n  \"idCarro\": \"678c3f18da6b0053e9ab5138\",\n  \"idZona\": \"678c3f2cda6b0053e9ab513a\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record ParquimetroDto(
@@ -27,7 +26,7 @@ public record ParquimetroDto(
         Long duracaoEmHoras,
 
         @Schema(type = "number", format = "double", hidden = true)
-        BigDecimal valorTotal,
+        double valorTotal,
 
         @NotBlank(message = "O ID do carro e obrigatorio.")
         String idCarro,

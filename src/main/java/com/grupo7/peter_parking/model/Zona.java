@@ -5,8 +5,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.math.BigDecimal;
-
 @Data
 @NoArgsConstructor
 @Document(collection = "zonas")
@@ -17,5 +15,5 @@ public class Zona {
 
     private String nome;
 
-    private BigDecimal valorPorHora;
+    private double valorPorHora;
 }

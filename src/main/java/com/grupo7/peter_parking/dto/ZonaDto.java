@@ -5,8 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
-import java.math.BigDecimal;
-
 public record ZonaDto(
 
     @Schema(hidden = true)
@@ -18,6 +16,6 @@ public record ZonaDto(
     @NotNull(message = "O valor por hora e obrigatorio.")
     @PositiveOrZero(message = "O valor deve ser maior ou igual a zero")
     @Schema(type = "number", format = "double", example = "10.50")
-    BigDecimal valorPorHora
+    double valorPorHora
 ) {
 }

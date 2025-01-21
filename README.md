@@ -79,6 +79,13 @@ docker run --name mongo-peter-parking --network parkingrede -d -p 27017:27017 mo
 5 - Executar container com imagem da aplicação
 docker run --name app-peter-parking --network parkingrede -e MONGO_NAME=mongo-peter-parking -d -p 8080:8080 peter-parking
 
+6 - Criar tag da imagem para subir no dockerhub
+EX: docker tag peter-parking:{LOCAL_VERSION} {DOCKER_NAME}/{IMAGE_NAME}:{REMOTE_VERSION}
+docker tag peter-parking:latest majorv22/peter-parking:2.0
+
+7 - Subir aplicação para dockerhub
+docker push majorv22/peter-parking:2.0
+
 ------------REUTILIZANDO IMGEM-----------------------
 Após subir a imagem no dockerhub de maneira pública, basta utilizar a imagem pública para subir a aplicação
 docker run --name app-peter-parking --network parkingrede -e MONGO_NAME=mongo-peter-parking -d -p 8080:8080 majorv22/peter-parking:1.0

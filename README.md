@@ -88,6 +88,6 @@ docker push majorv22/peter-parking:2.0
 
 ------------REUTILIZANDO IMGEM-----------------------
 Após subir a imagem no dockerhub de maneira pública, basta utilizar a imagem pública para subir a aplicação
-docker run --name app-peter-parking --network parkingrede -e MONGO_NAME=mongo-peter-parking -d -p 8080:8080 majorv22/peter-parking:1.0
+docker run --name app-peter-parking --network parkingrede -e MONGO_NAME=mongo-peter-parking -d -p 8080:8080 majorv22/peter-parking:2.0
 
 ```
